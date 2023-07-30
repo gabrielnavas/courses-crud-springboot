@@ -17,6 +17,12 @@ public class CourseController {
 
     @GetMapping
     public List<Course> list() {
+        this.courseRepository.save(new Course("Angular", "front-end"));
         return courseRepository.findAll();
+    }
+
+    @PostMapping
+    public Course save(@RequestBody Course course) {
+        return this.courseRepository.save(course);
     }
 }
