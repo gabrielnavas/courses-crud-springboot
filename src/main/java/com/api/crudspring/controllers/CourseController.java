@@ -25,8 +25,13 @@ public class CourseController {
     }
 
     @PostMapping
-    public ResponseEntity<Course> save(@RequestBody Course course) {
-        Course courseCreated = this.courseRepository.save(course);
-        return ResponseEntity.status(HttpStatus.CREATED).body(courseCreated);
+    public ResponseEntity<Object> save(@RequestBody Course course) {
+        try {
+            Course courseCreated = this.courseRepository.save(course);
+            return ResponseEntity.status(HttpStatus.CREATED).body(courseCreated);
+        }
+        catch(Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("server error");
+        }
     }
 }
