@@ -3,6 +3,9 @@ package com.api.crudspring.controllers;
 import com.api.crudspring.models.Course;
 import com.api.crudspring.repositories.CourseRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,7 +25,8 @@ public class CourseController {
     }
 
     @PostMapping
-    public Course save(@RequestBody Course course) {
-        return this.courseRepository.save(course);
+    public ResponseEntity<Course> save(@RequestBody Course course) {
+        Course courseCreated = this.courseRepository.save(course);
+        return ResponseEntity.status(HttpStatus.CREATED).body(courseCreated);
     }
 }
